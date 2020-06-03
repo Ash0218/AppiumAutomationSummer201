@@ -5,6 +5,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
@@ -67,6 +68,10 @@ public class Day1 {
         MobileElement digit2 = driver.findElement(By.id("com.android.calculator2:id/digit_2")); // 14
         // com.android.calculator2:id/digit_2 -> I copied from the Appium search box
 
+        MobileElement digit4 = driver.findElement(By.id("com.android.calculator2:id/digit_4")); // 29
+        MobileElement digit6 = driver.findElement(By.id("com.android.calculator2:id/digit_6")); // 24
+        MobileElement digit7 = driver.findElement(By.id("com.android.calculator2:id/digit_7")); // 28
+
         MobileElement plus = driver.findElement(MobileBy.AccessibilityId("plus")); // 15
         // plus -> I copied from Appium search box
         // MobileBy -> a child class of By
@@ -77,7 +82,32 @@ public class Day1 {
         MobileElement result = driver.findElement(By.id("com.android.calculator2:id/result")); // 17
         // com.android.calculator2:id/result -> I copied from Appium search box
 
+        MobileElement multiply = driver.findElement(MobileBy.AccessibilityId("multiply")); // 25
+        MobileElement divide = driver.findElement(MobileBy.AccessibilityId("divide")); // 26
+        MobileElement minus = driver.findElement(MobileBy.AccessibilityId("minus")); // 27
+
+        digit2.click(); // 18
+        // click on digit 2
+        plus.click(); // 19
+        // click on plus
+        digit2.click(); // 20
+        equals.click(); // 21
+        // click on equals
+
+        String resultText = result.getText(); // 22
+        // read text of result
+
+        Assert.assertEquals("4", resultText); // 23
+        // assert that result equals to 4
+
+
+
 
         driver.closeApp(); // 11
+    }
+
+
+    public MobileElement getDigit(int digit){ // 30
+        return driver.findElement(By.id("com.android.calculator2:id/digit_"+digit)); // 31
     }
 }
