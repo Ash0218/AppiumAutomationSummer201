@@ -100,8 +100,23 @@ public class Day1 {
         Assert.assertEquals("4", resultText); // 23
         // assert that result equals to 4
 
+        // 4 * 5 = 20
+        getDigit(4).click(); // 32
+        multiply.click(); // 34
+        getDigit(5).click(); // 33
+        equals.click(); // 35
 
+        resultText = result.getText(); // 36
+        Assert.assertEquals("20", resultText); // 37
 
+        // 8/4 = 4
+        getDigit(8).click(); // 38
+        divide.click(); // 39
+        getDigit(4).click(); // 40
+        equals.click(); // 41
+
+        resultText = result.getText(); // 42
+        Assert.assertEquals("2", resultText); // 43
 
         driver.closeApp(); // 11
     }
