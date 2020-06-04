@@ -118,7 +118,35 @@ public class Day1 {
         resultText = result.getText(); // 42
         Assert.assertEquals("2", resultText); // 43
 
+        // 50 - 30 = 20
+        getDigit(5).click(); // 44
+        getDigit(0).click(); // 45
+        minus.click(); // 46
+        getDigit(3).click(); // 47
+        getDigit(0).click(); // 48
+        equals.click(); // 49
+
+        resultText = result.getText(); // 50
+        Assert.assertEquals("20", resultText); // 51
+
         driver.closeApp(); // 11
+    }
+
+
+    @Test
+    public void test2() throws Exception{ // 52
+        // put throws Exception to compile #59
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities(); // 53
+        desiredCapabilities.setCapability("platfromName", "Android"); // 54
+        desiredCapabilities.setCapability(MobileCapabilityType.VERSION, "7.0"); // 55
+        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_2"); // 56
+        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2"); // 57
+
+        //to specify app for testing.
+        //it can be on your computer or somewhere in cloud
+        desiredCapabilities.setCapability("app", "https://cybertek-appium.s3.amazonaws.com/etsy.apk"); // 60
+        driver = new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), desiredCapabilities); // 58
+        Thread.sleep(3000); // 59
     }
 
 
