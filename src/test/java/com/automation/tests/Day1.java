@@ -8,7 +8,9 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -146,7 +148,30 @@ public class Day1 {
         //it can be on your computer or somewhere in cloud
         desiredCapabilities.setCapability("app", "https://cybertek-appium.s3.amazonaws.com/etsy.apk"); // 60
         driver = new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), desiredCapabilities); // 58
-        Thread.sleep(3000); // 59
+        Thread.sleep(10000); // 59
+        MobileElement search = driver.findElement(By.id("com.etsy.android:id/search_src_text")); // 61
+
+        search.click(); // 68
+        // StaleElementReferenceException -> made error -> add try catch (#69-73)
+        try { // 69
+            search.sendKeys("Java"); // 71
+        } catch (WebDriverException e){ // 70
+            search = driver.findElement(By.id("com.etsy.android:id/search_src_text")); // 72
+            search.sendKeys("Java"); // 73
+        }
+
+
+     //   search.sendKeys("Java"); // 62
+        // don't use cause we have #69-73
+
+        Thread.sleep(5000); // 63
+
+        driver.getKeyboard().pressKey(Keys.ENTER); // 64
+        driver.hideKeyboard(); // 65
+
+        Thread.sleep(5000); // 66
+
+        driver.closeApp(); // 67
     }
 
 
