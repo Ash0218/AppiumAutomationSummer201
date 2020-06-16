@@ -1,12 +1,16 @@
 package com.automation.tests;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,7 +39,39 @@ public class Day2 {
         driver.closeApp(); // 13
     }
 
-    public void test(){
+
+    @Test
+    public void test() throws Exception{ // 14
+     //   Thread.sleep(5000); // 15
+        WebDriverWait wait = new WebDriverWait(driver, 20); // 16
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Views"))); // 17
+        // Views -> was copied from Appium
+        // It is explicit wait.
+        // Implicit wait -> apply to all elements
+        // don't use implicit and explicit together
+
+        driver.findElement(MobileBy.AccessibilityId("Views")).click(); // 18
+
+
+        MobileElement webview = driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable("
+                 + "new UiSelector().scrollable(true)).scrollIntoView("
+                 + "new UiSelector().textContains(\"WebView\"));")); // 19
+        // it is from: developer.android.com/reference/android/support/test/uiautomator/UiSelector#checkable
+        // instead of testContains, you can use: text or id, className
+        // if you want to know if the text is Webview, open Appium ->
+        //  in the emulator in Appium, click the word, check the text
+        //  shows "WebView"
+
+        webview.click(); // 20
+
+        // go back
+        driver.navigate().back(); // 21
+
+        MobileElement imageSwitcher = driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable("
+                + "new UiSelector().scrollable(true)).scrollIntoView("
+                + "new UiSelector().textContains(\"ImageSwitcher\"));")); // 22
+
+        imageSwitcher.click(); // 23
 
     }
 }
