@@ -23,7 +23,7 @@ public class Day2 {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities(); // 3
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_2"); // 4
         desiredCapabilities.setCapability(MobileCapabilityType.VERSION, "7.0"); // 5
-        desiredCapabilities.setCapability(MobileCapabilityType.APP, System.getProperty("user.dir")+"/api_demos.apk"); // 6
+        desiredCapabilities.setCapability(MobileCapabilityType.APP, "https://cybertek-appium.s3.amazonaws.com/api_demos.apk"); // 6
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID); // 7
         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2"); // 8
         try { // 10
@@ -41,8 +41,8 @@ public class Day2 {
 
 
     @Test
-    public void test() throws Exception{ // 14
-     //   Thread.sleep(5000); // 15
+    public void test() throws Exception { // 14
+        //   Thread.sleep(5000); // 15
         WebDriverWait wait = new WebDriverWait(driver, 20); // 16
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Views"))); // 17
         // Views -> was copied from Appium
@@ -54,8 +54,8 @@ public class Day2 {
 
 
         MobileElement webview = driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable("
-                 + "new UiSelector().scrollable(true)).scrollIntoView("
-                 + "new UiSelector().textContains(\"WebView\"));")); // 19
+                + "new UiSelector().scrollable(true)).scrollIntoView("
+                + "new UiSelector().textContains(\"WebView\"));")); // 19
         // it is from: developer.android.com/reference/android/support/test/uiautomator/UiSelector#checkable
         // instead of testContains, you can use: text or id, className
         // if you want to know if the text is Webview, open Appium ->
@@ -65,12 +65,22 @@ public class Day2 {
         webview.click(); // 20
 
         // go back
-        driver.navigate().back(); // 21
+        //  driver.navigate().back(); // 21
+    }
+
+
+    @Test
+    public void test2() throws Exception{
+
+        WebDriverWait wait2 = new WebDriverWait(driver, 20);
+        wait2.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Views")));
+
+        driver.findElement(MobileBy.AccessibilityId("Views")).click();
+
 
         MobileElement imageSwitcher = driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable("
                 + "new UiSelector().scrollable(true)).scrollIntoView("
                 + "new UiSelector().textContains(\"ImageSwitcher\"));")); // 22
-
         imageSwitcher.click(); // 23
 
     }
